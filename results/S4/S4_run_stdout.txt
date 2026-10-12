@@ -1,0 +1,36 @@
+USTEC: M1 rows 546628 (load window incl. warm-up buffer)
+USTEC: n=351 samebar=49
+US30: M1 rows 546468 (load window incl. warm-up buffer)
+US30: n=348 samebar=48
+
+=== AMENDMENT 6: same-bar adverse touches = 97/699 (13.9%) — native, not post-hoc ===
+
+--- PRIMARY CONFIG (unfiltered) ---
+{'label': 'primary/1x spread', 'n': 699, 'PF': np.float64(1.245), 'win_rate': np.float64(0.187), 'mean_R': np.float64(0.2069), 'years_positive': '1/2', 'by_year_R': {2025: 154.97, 2026: -10.38}}
+{'label': 'primary/2x spread', 'n': 699, 'PF': np.float64(1.186), 'win_rate': np.float64(0.187), 'mean_R': np.float64(0.1638), 'years_positive': '1/2', 'by_year_R': {2025: 131.33, 2026: -16.85}}
+{'label': 'USTEC/primary/1x', 'n': 351, 'PF': np.float64(1.357), 'win_rate': np.float64(0.194), 'mean_R': np.float64(0.3037), 'years_positive': '2/2', 'by_year_R': {2025: 77.48, 2026: 29.12}}
+{'label': 'US30/primary/1x', 'n': 348, 'PF': np.float64(1.13), 'win_rate': np.float64(0.181), 'mean_R': np.float64(0.1092), 'years_positive': '1/2', 'by_year_R': {2025: 77.49, 2026: -39.5}}
+
+--- DETECTABILITY A/B (+1 bar fill), primary population ---
+{'label': 'detect+1bar/1x spread', 'n': 699, 'PF': np.float64(1.387), 'win_rate': np.float64(0.242), 'mean_R': np.float64(0.3108), 'years_positive': '2/2', 'by_year_R': {2025: 124.71, 2026: 92.56}}
+
+--- A-014b (rel_vol >= 0.8602, frozen threshold) ---
+{'label': 'A014b/1x spread', 'n': 494, 'PF': np.float64(1.198), 'win_rate': np.float64(0.184), 'mean_R': np.float64(0.1669), 'years_positive': '1/2', 'by_year_R': {2025: 84.36, 2026: -1.9}}
+{'label': 'A014b/2x spread', 'n': 494, 'PF': np.float64(1.146), 'win_rate': np.float64(0.184), 'mean_R': np.float64(0.128), 'years_positive': '1/2', 'by_year_R': {2025: 70.36, 2026: -7.1}}
+{'label': 'USTEC/A014b/1x', 'n': 270, 'PF': np.float64(1.333), 'win_rate': np.float64(0.189), 'mean_R': np.float64(0.2834), 'years_positive': '2/2', 'by_year_R': {2025: 62.35, 2026: 14.16}}
+{'label': 'US30/A014b/1x', 'n': 224, 'PF': np.float64(1.032), 'win_rate': np.float64(0.179), 'mean_R': np.float64(0.0266), 'years_positive': '1/2', 'by_year_R': {2025: 22.02, 2026: -16.06}}
+{'label': 'A014b/detect+1bar/1x', 'n': 494, 'PF': np.float64(1.471), 'win_rate': np.float64(0.249), 'mean_R': np.float64(0.3722), 'years_positive': '2/2', 'by_year_R': {2025: 75.42, 2026: 108.47}}
+(excluded-set check) {'label': 'A014b/EXCLUDED/1x', 'n': 205, 'PF': np.float64(1.358), 'win_rate': np.float64(0.195), 'mean_R': np.float64(0.3031), 'years_positive': '1/2', 'by_year_R': {2025: 70.61, 2026: -8.48}}
+
+--- Amendment 2 cost sanity (both configs) ---
+primary: gross=8056.6 net=6916.6 aggregate_cost=-1140.0 (OK negative)
+A014b: gross=7024.5 net=6219.3 aggregate_cost=-805.2 (OK negative)
+
+--- Amendment 3 weekday distribution (primary pooled) ---
+{'Monday': 142, 'Wednesday': 142, 'Tuesday': 141, 'Thursday': 139, 'Friday': 135}
+
+--- exit-reason mix ---
+primary: {'SL': 566, 'session_close': 133}
+A014b: {'SL': 401, 'session_close': 93}
+
+Saved to results/S4

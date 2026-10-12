@@ -1,0 +1,51 @@
+========================================================================================================================
+  A-014 S4 — ONE-SHOT HOLDOUT 2025-01-01 .. 2026-05-21, decisive config USTEC-only (card section 10)
+========================================================================================================================
+
+  [1] Inverted-geometry trades in the +1-minute column (entry on the wrong side of its stop)
+      S3: 20 of 1019 trades, all booked as SL at a profit, sum +12.7R; pooled mean R +0.023 -> +0.011 without them
+      S4: 35 of 699 trades, all booked as SL at a profit, sum +16.0R; pooled mean R +0.311 -> +0.303 without them
+
+  [2] DECISIVE — USTEC only
+  bound A  fill at level, 1x spread      n  351  win  19.4%  PF 1.357  meanR +0.304  t +1.75  totR  +106.6  maxDD  29.3R  months+ 13/17  {2025: 77.5, 2026: 29.1}
+  bound A  fill at level, 2x spread      n  351  win  19.4%  PF 1.274  meanR +0.246  t +1.42  totR   +86.3  maxDD  33.9R  months+ 12/17  {2025: 61.6, 2026: 24.7}
+  bound B  +1 min fill (bug-fixed), 1x   n  330  win  21.5%  PF 1.450  meanR +0.376  t +1.57  totR  +124.0  maxDD  39.0R  months+ 10/17  {2025: 39.0, 2026: 85.0}
+  bound B  +1 min fill (bug-fixed), 2x   n  330  win  21.5%  PF 1.345  meanR +0.307  t +1.29  totR  +101.4  maxDD  48.4R  months+ 9/17  {2025: 21.0, 2026: 80.4}
+
+  [3] Why the late fill beats the at-level fill in this window
+      at-level trades stopped INSIDE the break minute (adverse-first convention): 49 of 351 (14.0%) at -1.07R each = -52.5R
+      same share in 2023-24 validation: 6.8%
+      at-level WITHOUT those minutes: mean R +0.527 (n 302) — the late fill is not skipping signal, it is skipping minutes the at-level column scores as losses by assumption.
+      M1 bars cannot say whether the break or the reversal came first inside that minute, so bound A is
+      the conservative bound and bound B is not an upper bound either. The operative point needs M-001.
+
+  [4] S4 PASS criterion (pre-registered): USTEC mean net R > 0 at 1x spread at the operative fill
+      bound A +0.304 -> positive;  bound B +0.376 -> positive
+      bounds agree -> verdict FINAL today: S4 PASS
+
+      Re-pricing bound A at M-001 slippage (entry moved against the trade, stop fixed):
+       slip pts    PF 1x  meanR 1x    PF 2x  meanR 2x
+           0.00    1.357    +0.304    1.274    +0.246
+           0.50    1.334    +0.284    1.253    +0.227
+           1.00    1.312    +0.265    1.234    +0.209
+           1.80    1.278    +0.236    1.204    +0.182
+           3.00    1.230    +0.195    1.161    +0.143
+           5.00    1.158    +0.133    1.096    +0.085
+      break-even slippage on the holdout, 1x: 10.28 pts
+
+  [5] FULL ACCEPTANCE BAR — USTEC, IS (same-bar corrected) + validation + holdout, bound A
+  USTEC 2018-2026, 1x                    n 2138  win  17.0%  PF 1.248  meanR +0.232  t +2.89  totR  +496.9  maxDD  66.1R  months+ 59/101  {2018: 114.4, 2019: 41.2, 2020: -38.4, 2021: 76.9, 2022: 30.4, 2023: 13.9, 2024: 151.8, 2025: 77.5, 2026: 29.1}
+  USTEC 2018-2026, 2x                    n 2138  win  16.9%  PF 1.095  meanR +0.099  t +1.23  totR  +211.9  maxDD 128.3R  months+ 56/101  {2018: 49.6, 2019: -22.3, 2020: -75.0, 2021: 42.4, 2022: 10.7, 2023: -14.3, 2024: 134.4, 2025: 61.6, 2026: 24.7}
+      [PASS] >= 400 trades                                                  2138
+      [FAIL] PF >= 1.25 at 2x spread (bound A, detectability NOT resolved)  1.095
+      [PASS] >= 6 of the calendar years positive at 2x                      6/9 {2018: 49.6, 2019: -22.3, 2020: -75.0, 2021: 42.4, 2022: 10.7, 2023: -14.3, 2024: 134.4, 2025: 61.6, 2026: 24.7}
+      [FAIL] maxDD < 20% at 1% risk/trade, 2x spread                        82.9%
+      [PASS] positive on the holdout, once                                  A +0.304 / B +0.376
+      [----] parameter neighbourhood stable                                 not re-run (exit brackets fail by construction, see card §8)
+      [----] demo reconciles trade-for-trade                                not started
+
+  [6] DESCRIPTIVE ONLY (no verdict): US30 and pooled, same window, bound A 1x
+  US30 at level, 1x                      n  348  win  18.1%  PF 1.130  meanR +0.109  t +0.71  totR   +38.0  maxDD  48.2R  months+ 9/17  {2025: 77.5, 2026: -39.5}
+  POOLED at level, 1x                    n  699  win  18.7%  PF 1.245  meanR +0.207  t +1.79  totR  +144.6  maxDD  55.2R  months+ 11/17  {2025: 155.0, 2026: -10.4}
+
+  Red-flag scan (protocol): PF>3 False | >0.5R/trade False | every month positive False | A/B inversion True (explained in [3]; bug in [1] fixed)
